@@ -1,0 +1,41 @@
+rules_version = '2';
+// Reglas de seguridad de Firestore para Nido del Jabalí.
+// Solo el correo administrador puede ver pedidos y cambiar precios/promociones.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'nidodeljvalismokehouse@gmail.com';
+    }
+
+    // Menú y promociones: todos pueden leer, solo el admin edita.
+    match /content/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Pedidos: cualquiera puede CREAR un pedido; solo el admin puede verlos y cambiarlos.
+    match /orders/{orderId} {
+      allow create: if request.resource.data.status == 'pendiente'
+        && request.resource.data.name is string && request.resource.data.name.size() <= 60
+        && request.resource.data.phone is string && request.resource.data.phone.size() <= 20
+        && request.resource.data.items is list && request.resource.data.items.size() <= 50
+        && request.resource.data.total is number
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Reseñas: todos leen; cualquiera publica una reseña válida; solo el admin borra.
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isAdmin() || (
+        request.resource.data.keys().hasOnly(['name', 'text', 'rating', 'createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 40
+        && request.resource.data.text is string && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 500
+        && request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5
+        && request.resource.data.createdAt == request.time);
+      allow delete: if isAdmin();
+    }
+  }
+}

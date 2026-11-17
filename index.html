@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nido del Jabalí Smokehouse</title>
+  <meta name="description" content="Nido del Jabalí Smokehouse — Costillas BBQ y alitas texanas. Del corral a la mesa. Pedidos al 272 281 38 77.">
+  <meta name="theme-color" content="#16100b">
+  <link rel="icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Satisfy&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===== Barra superior ===== -->
+<header class="topbar">
+  <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#inicio" class="topbar-brand">
+    <img src="img/logo.png" alt="" width="48" height="38">
+    <span>Nido del Jabalí</span>
+  </a>
+  <button class="cart-btn" id="cartBtn" aria-label="Ver pedido">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM5.2 4l.4 2H21l-2.2 8.2a2 2 0 0 1-1.9 1.5H8.1a2 2 0 0 1-2-1.6L3.6 2H1V0h4.2l.5 2"/></svg>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</header>
+
+<!-- ===== Menú lateral (3 líneas) ===== -->
+<div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+<nav class="drawer" id="drawer" aria-label="Navegación" aria-hidden="true">
+  <div class="drawer-head">
+    <img src="img/logo.png" alt="Nido del Jabalí Smokehouse" width="120" height="94">
+  </div>
+  <a href="#inicio">Inicio</a>
+  <a href="#promociones">Promociones</a>
+  <a href="#ordenar">Menú y pedidos</a>
+  <a href="#galeria">Galería</a>
+  <a href="#resenas">Reseñas</a>
+  <a href="#contacto">Contacto</a>
+  <div class="drawer-sep"></div>
+  <button class="drawer-admin" id="adminEntryBtn">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 1 3 5v6c0 5.6 3.8 10.7 9 12 5.2-1.3 9-6.4 9-12V5l-9-4Zm0 6a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 14c-2.3-.7-4.2-2.4-5.3-4.5 1.1-1.3 3.2-2 5.3-2s4.2.7 5.3 2C16.2 18.6 14.3 20.3 12 21Z"/></svg>
+    <span id="adminEntryLabel">Administrador</span>
+    <span class="badge" id="pendingBadge" hidden>0</span>
+  </button>
+  <button class="drawer-logout" id="logoutBtn" hidden>Cerrar sesión</button>
+  <a class="drawer-phone" href="tel:+522722813877">📞 272 281 38 77</a>
+</nav>
+
+<main>
+  <!-- ===== Inicio ===== -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <img class="hero-logo" src="img/logo.png" alt="Nido del Jabalí Smokehouse" width="288" height="226">
+      <p class="hero-tag">Del corral a la mesa</p>
+      <p class="hero-sub">Costillas BBQ y alitas texanas hechas a fuego lento, con nuestras salsas de la casa: Tamarindo Chipotle y Mango Habanero.</p>
+      <div class="hero-cta">
+        <a href="#ordenar" class="btn btn-gold">Ordenar ahora</a>
+        <a href="tel:+522722813877" class="btn btn-outline">Llamar 272 281 38 77</a>
+      </div>
+      <p class="hero-hash">#DelCorralALaMesa · #CostillasBBQ · #InstintoSalvaje</p>
+    </div>
+  </section>
+
+  <!-- ===== Promociones ===== -->
+  <section class="section" id="promociones">
+    <div class="section-head">
+      <span class="star">★</span>
+      <h2>Promociones</h2>
+      <p>Aprovecha nuestras ofertas de la semana</p>
+    </div>
+    <div class="promo-grid" id="promoGrid"></div>
+  </section>
+
+  <!-- ===== Menú / Ordenar ===== -->
+  <section class="section section-wood" id="ordenar">
+    <div class="section-head">
+      <span class="star">★</span>
+      <h2>Menú y pedidos</h2>
+      <p>Elige tus platillos, agrégalos a tu pedido y nosotros lo preparamos</p>
+    </div>
+    <div class="order-layout">
+      <div class="menu-board" id="menuBoard"></div>
+      <aside class="cart-panel" id="cartPanel">
+        <h3>Tu pedido</h3>
+        <ul class="cart-list" id="cartList"></ul>
+        <p class="cart-empty" id="cartEmpty">Aún no agregas nada. ¡Las costillas te esperan!</p>
+        <div class="cart-total"><span>Total</span><strong id="cartTotal">$0</strong></div>
+        <form id="orderForm" class="order-form" novalidate>
+          <label>Nombre<input name="name" required autocomplete="name" maxlength="60"></label>
+          <label>Teléfono<input name="phone" required type="tel" autocomplete="tel" maxlength="20" inputmode="tel"></label>
+          <fieldset class="seg">
+            <legend>Entrega</legend>
+            <label><input type="radio" name="delivery" value="Recoger en local" checked> Recoger</label>
+            <label><input type="radio" name="delivery" value="A domicilio"> A domicilio</label>
+          </fieldset>
+          <label id="addressWrap" hidden>Dirección<input name="address" autocomplete="street-address" maxlength="160"></label>
+          <label>Notas (opcional)<textarea name="notes" rows="2" maxlength="300" placeholder="Ej. sin cebolla, extra salsa…"></textarea></label>
+          <p class="form-error" id="orderError" role="alert"></p>
+          <button type="submit" class="btn btn-gold btn-block" id="orderSubmit">Realizar pedido</button>
+          <p class="cart-note">¿Dudas? Llámanos al <a href="tel:+522722813877">272 281 38 77</a></p>
+        </form>
+      </aside>
+    </div>
+    <p class="menu-foot">Todos los platillos incluyen nuestras salsas de la casa: Tamarindo Chipotle y Mango Habanero.</p>
+  </section>
+
+  <!-- ===== Galería ===== -->
+  <section class="section" id="galeria">
+    <div class="section-head">
+      <span class="star">★</span>
+      <h2>Galería</h2>
+      <p>Así sale del asador</p>
+    </div>
+    <div class="gallery">
+      <button class="g-item g-tall" data-full="img/costillas-1.jpg"><img src="img/costillas-1.jpg" alt="Montaña de costillas BBQ sobre tabla de madera" loading="lazy"></button>
+      <button class="g-item" data-full="img/costillas-2.jpg"><img src="img/costillas-2.jpg" alt="Costillas glaseadas recién salidas del asador" loading="lazy"></button>
+      <button class="g-item" data-full="img/alitas-1.jpg"><img src="img/alitas-1.jpg" alt="Alitas texanas a la parrilla" loading="lazy"></button>
+      <button class="g-item g-wide" data-full="img/alitas-2.jpg"><img src="img/alitas-2.jpg" alt="Alitas BBQ con puré de papa y pasta" loading="lazy"></button>
+    </div>
+  </section>
+
+  <!-- ===== Reseñas ===== -->
+  <section class="section section-wood" id="resenas">
+    <div class="section-head">
+      <span class="star">★</span>
+      <h2>Reseñas</h2>
+      <p id="ratingSummary">Lo que dicen nuestros clientes</p>
+    </div>
+    <div class="reviews" id="reviewList"></div>
+    <form class="review-form" id="reviewForm" novalidate>
+      <h3>Deja tu reseña</h3>
+      <div class="stars-input" id="starsInput" role="radiogroup" aria-label="Calificación">
+        <button type="button" data-v="1" aria-label="1 estrella">★</button>
+        <button type="button" data-v="2" aria-label="2 estrellas">★</button>
+        <button type="button" data-v="3" aria-label="3 estrellas">★</button>
+        <button type="button" data-v="4" aria-label="4 estrellas">★</button>
+        <button type="button" data-v="5" aria-label="5 estrellas">★</button>
+      </div>
+      <label>Tu nombre<input name="name" required maxlength="40"></label>
+      <label>Tu opinión<textarea name="text" rows="3" required maxlength="500"></textarea></label>
+      <p class="form-error" id="reviewError" role="alert"></p>
+      <button type="submit" class="btn btn-gold">Publicar reseña</button>
+    </form>
+  </section>
+
+  <!-- ===== Contacto ===== -->
+  <section class="section contact" id="contacto">
+    <div class="section-head">
+      <span class="star">★</span>
+      <h2>Contacto</h2>
+      <p>Haz tu pedido por teléfono o WhatsApp</p>
+    </div>
+    <div class="contact-cards">
+      <a class="contact-card" href="tel:+522722813877">
+        <span class="contact-ico">📞</span>
+        <strong>272 281 38 77</strong>
+        <small>Llámanos</small>
+      </a>
+      <a class="contact-card" href="https://wa.me/522722813877" target="_blank" rel="noopener">
+        <span class="contact-ico">💬</span>
+        <strong>WhatsApp</strong>
+        <small>Escríbenos</small>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <img src="img/logo.png" alt="" width="110" height="86">
+  <p class="footer-tag">Del corral a la mesa</p>
+  <p>© <span id="year"></span> Nido del Jabalí Smokehouse · Tel. <a href="tel:+522722813877">272 281 38 77</a></p>
+</footer>
+
+<a class="fab-call" href="tel:+522722813877" aria-label="Llamar al 272 281 38 77">📞</a>
+
+<!-- ===== Modal: opciones de platillo ===== -->
+<dialog class="modal" id="optionModal">
+  <form method="dialog" class="modal-body" id="optionForm">
+    <h3 id="optionTitle"></h3>
+    <div id="optionFields"></div>
+    <div class="qty-row">
+      <span>Cantidad</span>
+      <div class="qty">
+        <button type="button" data-step="-1" aria-label="Menos">−</button>
+        <output id="optionQty">1</output>
+        <button type="button" data-step="1" aria-label="Más">+</button>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button value="cancel" class="btn btn-ghost" formnovalidate>Cancelar</button>
+      <button value="ok" class="btn btn-gold" id="optionOk">Agregar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ===== Modal: pedido enviado ===== -->
+<dialog class="modal" id="doneModal">
+  <div class="modal-body center">
+    <div class="done-ico">✓</div>
+    <h3>¡Pedido recibido!</h3>
+    <p>Tu folio es <strong id="doneFolio"></strong>. En breve nos comunicaremos contigo para confirmar.</p>
+    <p class="muted">Si tienes prisa, llámanos al <a href="tel:+522722813877">272 281 38 77</a>.</p>
+    <button class="btn btn-gold" id="doneClose">Listo</button>
+  </div>
+</dialog>
+
+<!-- ===== Modal: inicio de sesión ===== -->
+<dialog class="modal" id="loginModal">
+  <form class="modal-body" id="loginForm" novalidate>
+    <h3>Acceso de administrador</h3>
+    <p class="muted">Inicia sesión para ver los pedidos pendientes y editar precios y promociones.</p>
+    <label>Correo<input name="email" type="email" autocomplete="username" required></label>
+    <label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label>
+    <p class="form-error" id="loginError" role="alert"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="loginCancel">Cancelar</button>
+      <button type="submit" class="btn btn-gold">Iniciar sesión</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ===== Lightbox ===== -->
+<dialog class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Cerrar">×</button>
+  <img id="lbImg" alt="">
+</dialog>
+
+<!-- ===== Panel de administrador ===== -->
+<div class="admin" id="adminPanel" hidden>
+  <div class="admin-bar">
+    <h2>Panel de administrador</h2>
+    <button class="btn btn-ghost" id="adminClose">Cerrar</button>
+  </div>
+  <div class="admin-tabs" role="tablist">
+    <button role="tab" class="active" data-tab="orders">Pedidos pendientes <span class="badge" id="tabBadge">0</span></button>
+    <button role="tab" data-tab="menu">Precios del menú</button>
+    <button role="tab" data-tab="promos">Promociones</button>
+    <button role="tab" data-tab="reviews">Reseñas</button>
+  </div>
+
+  <div class="admin-pane" data-pane="orders">
+    <div class="pane-tools">
+      <label class="chk"><input type="checkbox" id="showDone"> Mostrar pedidos entregados</label>
+    </div>
+    <div id="orderList" class="order-list"></div>
+  </div>
+
+  <div class="admin-pane" data-pane="menu" hidden>
+    <p class="muted">Cambia nombres, descripciones y precios. Los cambios se ven en la página al guardar.</p>
+    <div id="menuEditor"></div>
+    <div class="pane-actions">
+      <button class="btn btn-ghost" id="addMenuItem">+ Agregar platillo</button>
+      <button class="btn btn-gold" id="saveMenu">Guardar cambios</button>
+    </div>
+  </div>
+
+  <div class="admin-pane" data-pane="promos" hidden>
+    <p class="muted">Crea, edita, activa o desactiva promociones.</p>
+    <div id="promoEditor"></div>
+    <div class="pane-actions">
+      <button class="btn btn-ghost" id="addPromo">+ Nueva promoción</button>
+      <button class="btn btn-gold" id="savePromos">Guardar promociones</button>
+    </div>
+  </div>
+
+  <div class="admin-pane" data-pane="reviews" hidden>
+    <p class="muted">Puedes eliminar reseñas inapropiadas.</p>
+    <div id="reviewAdmin"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
