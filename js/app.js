@@ -5,7 +5,7 @@ import { CATEGORIES, FLAVORS, SIDES, DEFAULT_MENU, DEFAULT_PROMOS } from "./defa
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const money = n => "$" + Number(n || 0).toLocaleString("es-MX", { maximumFractionDigits: 2 });
+const money = n => "$" + Number(n || 0).toLocaleString("es-MX", { maximumFractionDigits: 2 }) + " MXN";
 const slug = s => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "item";
 const fmtDate = ms => new Date(ms).toLocaleString("es-MX", { dateStyle: "medium", timeStyle: "short" });
 
@@ -364,7 +364,7 @@ function drawMenuEditor() {
       <label>Categoría<select data-f="cat">${CATEGORIES.map(c => `<option value="${c.id}" ${c.id === i.cat ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select></label>
       <label>Nombre<input data-f="name" value="${esc(i.name)}"></label>
       <label>Descripción<input data-f="desc" value="${esc(i.desc)}"></label>
-      <label>Precio ($)<input data-f="price" type="number" min="0" step="1" inputmode="numeric" value="${esc(i.price)}"></label>
+      <label>Precio (MXN)<input data-f="price" type="number" min="0" step="1" inputmode="numeric" value="${esc(i.price)}"></label>
       <button class="btn btn-sm btn-danger" data-del-item="${n}" aria-label="Eliminar ${esc(i.name)}">Eliminar</button>
     </div>`).join("");
 }
@@ -405,8 +405,8 @@ function drawPromoEditor() {
     <div class="edit-row promo-edit" data-n="${n}">
       <label>Título<input data-f="title" value="${esc(p.title)}"></label>
       <label>Etiqueta<input data-f="tag" value="${esc(p.tag)}" placeholder="Ej. Martes de alitas"></label>
-      <label>Precio ($)<input data-f="price" type="number" min="0" inputmode="numeric" value="${esc(p.price)}"></label>
-      <label>Antes ($)<input data-f="before" type="number" min="0" inputmode="numeric" value="${esc(p.before ?? "")}"></label>
+      <label>Precio (MXN)<input data-f="price" type="number" min="0" inputmode="numeric" value="${esc(p.price)}"></label>
+      <label>Antes (MXN)<input data-f="before" type="number" min="0" inputmode="numeric" value="${esc(p.before ?? "")}"></label>
       <label class="chk"><input data-f="active" type="checkbox" ${p.active ? "checked" : ""}> Activa</label>
       <button class="btn btn-sm btn-danger" data-del-promo="${n}">Eliminar</button>
       <label class="wide">Descripción<input data-f="desc" value="${esc(p.desc)}"></label>
