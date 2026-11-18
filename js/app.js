@@ -494,3 +494,19 @@ $("#reviewAdmin").addEventListener("click", async e => {
     link.href = `https://web.whatsapp.com/send?phone=${PHONE}&text=${TEXT}`;
   }
 })();
+
+/* ---------- Confirmar antes de llamar ---------- */
+(() => {
+  const callModal = $("#callModal");
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="tel:+522722813877"]');
+    if (!a || a.id === "callConfirm") return;
+    e.preventDefault();
+    setDrawer(false);
+    if ($("#doneModal").open) $("#doneModal").close();
+    callModal.showModal();
+  });
+  $("#callCancel").addEventListener("click", () => callModal.close());
+  $("#callConfirm").addEventListener("click", () => setTimeout(() => callModal.close(), 300));
+  callModal.addEventListener("click", e => { if (e.target === callModal) callModal.close(); });
+})();

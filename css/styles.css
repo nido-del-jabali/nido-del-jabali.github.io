@@ -375,3 +375,8 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--gold); outl
 .toast.show { transform: translate(-50%, 0); visibility: visible; }
 
 .demo-note { background: rgba(232,163,61,.12); border: 1px dashed var(--gold); border-radius: 10px; padding: 10px 12px; font-size: .88rem; color: var(--gold-2); margin-bottom: 12px; }
+
+/* ---------- Confirmar llamada ---------- */
+.call-ico { width: 64px; height: 64px; margin: 0 auto 10px; border-radius: 50%; background: var(--gold); font-size: 1.8rem; display: grid; place-items: center; }
+.call-number { font-family: var(--display); color: var(--gold); font-size: clamp(1.8rem, 8vw, 2.2rem); margin: 4px 0; letter-spacing: 1px; }
+.call-actions { justify-content: center; }
