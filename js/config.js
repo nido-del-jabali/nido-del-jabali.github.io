@@ -2,7 +2,7 @@
 //  CONFIGURACIÓN
 // =====================================================================
 //  Correo con acceso de administrador.
-export const ADMIN_EMAIL = "nidodeljvalismokehouse@gmail.com";
+export const ADMIN_EMAIL = "nidodeljavalismokehouse@gmail.com";
 
 //  Firebase (gratuito) guarda los pedidos, precios, promociones y reseñas
 //  en la nube, para que el administrador vea los pedidos que hacen los

@@ -18,7 +18,7 @@ export function makeFolio() {
    Modo local (demostración)
    =================================================================== */
 // Hash SHA-256 de "correo:contraseña" — así la contraseña no queda escrita en el código.
-const LOCAL_ADMIN_HASH = "90e83c8955f72d1f02ce23df00fc941cf31c2c565cc7933ebaeb3dec05aa0e98";
+const LOCAL_ADMIN_HASH = "4419a443f754b8f65543d2c70acb997f97a6d33352e2acf4509e30602f471244";
 
 function lsGet(key, fallback) {
   try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; }

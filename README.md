@@ -37,7 +37,7 @@ administrador**. Para eso hay que conectar Firebase (gratis):
 1. Entra a https://console.firebase.google.com con la cuenta del restaurante y crea un proyecto.
 2. **Build → Authentication → Get started → Email/Password → Enable.**
 3. En **Authentication → Users → Add user** crea el usuario
-   `nidodeljvalismokehouse@gmail.com` con su contraseña.
+   `nidodeljavalismokehouse@gmail.com` con su contraseña.
 4. **Build → Firestore Database → Create database** (modo producción).
 5. En **Firestore → Rules** pega el contenido de `firestore.rules` y publica.
 6. En **Project settings → General → Your apps → Web (</>)** registra la app y copia
