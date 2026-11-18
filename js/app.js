@@ -471,3 +471,26 @@ $("#reviewAdmin").addEventListener("click", async e => {
   store.watchReviews(list => { REVIEWS = list; renderReviews(); });
   store.onAuth(handleAuth);
 })();
+
+/* ---------- WhatsApp: abrir el chat directo ---------- */
+(() => {
+  const PHONE = "522722813877";
+  const TEXT = encodeURIComponent("Hola, quiero hacer un pedido");
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  const link = $("#waLink");
+  if (!link) return;
+  if (isMobile) {
+    // Abre la app de WhatsApp directamente en el chat
+    link.href = `whatsapp://send?phone=${PHONE}&text=${TEXT}`;
+    link.removeAttribute("target");
+    link.addEventListener("click", () => {
+      // Si la app no está instalada, abre la versión web
+      const t = setTimeout(() => { location.href = `https://api.whatsapp.com/send?phone=${PHONE}&text=${TEXT}`; }, 1500);
+      window.addEventListener("pagehide", () => clearTimeout(t), { once: true });
+      document.addEventListener("visibilitychange", () => document.hidden && clearTimeout(t), { once: true });
+    });
+  } else {
+    // En computadora abre WhatsApp Web directo en el chat
+    link.href = `https://web.whatsapp.com/send?phone=${PHONE}&text=${TEXT}`;
+  }
+})();
