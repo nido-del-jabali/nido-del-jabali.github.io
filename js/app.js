@@ -289,7 +289,7 @@ $("#logoutBtn").addEventListener("click", async () => {
 
 const handleAuth = admin => {
   isAdmin = admin;
-  $("#adminEntryLabel").textContent = admin ? "Pedidos pendientes" : "Administrador";
+  $("#adminEntryLabel").textContent = admin ? "Pedidos pendientes" : "Iniciar sesión";
   $("#logoutBtn").hidden = !admin;
   if (stopOrders) { stopOrders(); stopOrders = null; }
   if (admin) stopOrders = store.watchOrders(list => { ORDERS = list; renderOrders(); });
