@@ -3,7 +3,7 @@
 Página del restaurante: promociones, menú con pedidos en línea, galería, reseñas,
 contacto (272 281 38 77) y panel de administrador (menú de 3 líneas → **Iniciar sesión**).
 
-**Página publicada:** https://maik071440.github.io/nido-del-jabali/
+**Página publicada:** https://nido-del-jabali.github.io/
 
 Los pedidos, precios, promociones y reseñas se guardan en Firebase (proyecto `nido-del-jabali`).
 
@@ -47,7 +47,7 @@ administrador**. Para eso hay que conectar Firebase (gratis):
 6. En **Project settings → General → Your apps → Web (</>)** registra la app y copia
    el objeto `firebaseConfig` dentro de `FIREBASE_CONFIG` en `js/config.js`.
 7. En **Authentication → Settings → Authorized domains** agrega el dominio donde
-   publiques la página (por ejemplo `TU-USUARIO.github.io`).
+   publiques la página (por ejemplo `nido-del-jabali.github.io`).
 
 La contraseña del administrador vive solo en Firebase, no en el código.
 
