@@ -1,7 +1,11 @@
 # Nido del Jabalí Smokehouse — Página web
 
 Página del restaurante: promociones, menú con pedidos en línea, galería, reseñas,
-contacto (272 281 38 77) y panel de administrador (menú de 3 líneas → **Administrador**).
+contacto (272 281 38 77) y panel de administrador (menú de 3 líneas → **Iniciar sesión**).
+
+**Página publicada:** https://maik071440.github.io/nido-del-jabali/
+
+Los pedidos, precios, promociones y reseñas se guardan en Firebase (proyecto `nido-del-jabali`).
 
 ## Estructura
 
