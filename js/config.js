@@ -14,10 +14,10 @@ export const ADMIN_EMAIL = "nidodeljavalismokehouse@gmail.com";
 //
 //  Ver README.md → "Activar pedidos en línea (Firebase)".
 export const FIREBASE_CONFIG = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
+  apiKey: "AIzaSyBjA1I5K9FYCJx9xPdUVekupJ5BdK6l93o",
+  authDomain: "nido-del-jabali.firebaseapp.com",
+  projectId: "nido-del-jabali",
+  storageBucket: "nido-del-jabali.firebasestorage.app",
+  messagingSenderId: "357173119277",
+  appId: "1:357173119277:web:533ca7fef1f1732a526ba4",
 };
